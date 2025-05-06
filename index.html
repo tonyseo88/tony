@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html style="--app-height: 844px;">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -12,23 +11,26 @@
     <meta name="description" content="HB88 tự hào mang đến kho trò chơi đa dạng, nền tảng cá cược minh bạch và chương trình khuyến mãi hấp dẫn mỗi ngày. Với uy tín được khẳng định trên thị trường quốc tế, HB88 không chỉ là nơi thể hiện trí tuệ và bản lĩnh, mà còn là điểm đến tin cậy của hàng triệu game thủ đam mê." />
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link href="css/css.css" rel="stylesheet" type="text/css" />
-    
+
     <script type="text/javascript">
-        function isInWapPath() {
-            return window.location.pathname.includes("/wap/");
+        var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        if (oWidth > 1100) {
+            window.location.href = '../index.html';
         }
 
-        function redirectToWap() {
+        window.addEventListener('orientationchange', function () {
             var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
-            if (oWidth < 1100 && !isInWapPath()) {
-                window.location.href = "/wap/index.html";
+            if (oWidth > 1100) {
+                window.location.href = '../index.html';
             }
-        }
+        }, false);
 
-        redirectToWap();
-
-        window.addEventListener("orientationchange", redirectToWap, false);
-        window.addEventListener("resize", redirectToWap, false);
+        window.addEventListener('resize', function () {
+            var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+            if (oWidth > 1100) {
+                window.location.href = '../index.html';
+            }
+        }, false);
     </script>
 </head>
 
@@ -37,7 +39,8 @@
         <div class="content">
             <div class="videoBox">
                 <video class="video" autoplay="autoplay" muted="true" loop="loop" x5-video-player-fullscreen="true" x5-playsinline="" playsinline="" webkit-playsinline="">
-                    <source src="video/pc.webm" type="video/mp4">
+                    <source src="video/pc.webm" type="video/webm">
+                    <source src="video/pc.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="logo"><img src="images/logo.png" alt=""></div>
@@ -46,6 +49,16 @@
     </div>
 
     <script src="js/jquery.min.js"></script>
+    <script>
+        // Cập nhật chiều cao màn hình cho biến CSS
+        const appHeight = () => {
+            const doc = document.documentElement;
+            const docheight = window.innerHeight + 'px';
+            doc.style.setProperty('--app-height', docheight);
+            console.log(docheight);
+        };
+        window.addEventListener('resize', appHeight);
+        appHeight();
+    </script>
 </body>
-
 </html>
