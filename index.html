@@ -1,9 +1,10 @@
-<html style="--app-height: 844px;">
+<!DOCTYPE html>
+<html style="--app-height: 100vh">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="format-detection" content="telephone=no" />
     <title>HB88 - Chào mừng đến với HB88</title>
@@ -11,25 +12,29 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link href="css/css.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript">
-        var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
-        if (oWidth > 1100) {
-            window.location.href = '../index.html';
+    <!-- FIX: Ngăn nhảy liên tục -->
+    <script>
+        function shouldRedirectToWap() {
+            var oWidth = window.innerWidth;
+            var path = window.location.pathname;
+            return oWidth < 1100 && !path.includes("/wap/");
         }
 
-        window.addEventListener('orientationchange', function () {
-            var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
-            if (oWidth > 1100) {
-                window.location.href = '../index.html';
-            }
-        }, false);
+        if (shouldRedirectToWap()) {
+            window.location.href = "wap/index.html";
+        }
 
-        window.addEventListener('resize', function () {
-            var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
-            if (oWidth > 1100) {
-                window.location.href = '../index.html';
+        window.addEventListener("orientationchange", function () {
+            if (shouldRedirectToWap()) {
+                window.location.href = "wap/index.html";
             }
-        }, false);
+        });
+
+        window.addEventListener("resize", function () {
+            if (shouldRedirectToWap()) {
+                window.location.href = "wap/index.html";
+            }
+        });
     </script>
 </head>
 
@@ -37,27 +42,26 @@
     <div class="main">
         <div class="content">
             <div class="videoBox">
-                <video class="video" autoplay="autoplay" muted="true" loop="loop" x5-video-player-fullscreen="true" x5-playsinline="" playsinline="" webkit-playsinline="">
+                <video class="video" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-fullscreen="true">
                     <source src="video/pc.webm" type="video/webm">
                     <source src="video/pc.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="logo"><img src="images/logo.png" alt=""></div>
+            <div class="logo"><img src="images/logo.png" alt="Logo HB88"></div>
             <div class="btn"><a href="http://pk-02.online/tonyby88/"></a></div>
         </div>
     </div>
 
     <script src="js/jquery.min.js"></script>
+
+    <!-- FIX: cập nhật chiều cao động cho iOS -->
     <script>
-        // Cập nhật chiều cao màn hình cho biến CSS
-        const appHeight = () => {
-            const doc = document.documentElement;
-            const docheight = window.innerHeight + 'px';
-            doc.style.setProperty('--app-height', docheight);
-            console.log(docheight);
-        };
-        window.addEventListener('resize', appHeight);
-        appHeight();
+        function setAppHeight() {
+            document.documentElement.style.setProperty('--app-height', window.innerHeight + 'px');
+        }
+        window.addEventListener('resize', setAppHeight);
+        window.addEventListener('load', setAppHeight);
+        setAppHeight();
     </script>
 </body>
 </html>
