@@ -1068,3 +1068,40 @@ body {
 .main .content .btn a { width: 100%;  display: inline-block; height: calc(130/1046*100vh); background: url(../images/btn.png) no-repeat center center; background-size: auto 100%; }
     
 }
+
+
+/* === FIXED HEIGHT USING --app-height === */
+
+:root {
+  --app-height: 100vh;
+}
+
+/* Sửa toàn bộ vị trí dùng height: 100vh thành height: var(--app-height) */
+html, body {
+  height: var(--app-height);
+}
+
+.main {
+  height: var(--app-height);
+}
+
+.main .content {
+  height: var(--app-height);
+}
+
+.videoBox {
+  height: var(--app-height);
+}
+
+.videoBox .video {
+  height: var(--app-height);
+}
+
+@media screen and (max-width: 430px) {
+  .main .content .btn a {
+    height: calc(130/1046 * var(--app-height));
+  }
+  .main .content .logo img {
+    width: calc(250/1046 * var(--app-height));
+  }
+}
